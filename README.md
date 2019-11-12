@@ -1,11 +1,30 @@
-# New Project Template
+# cryptoHelper
 
-This repository contains a template you can use to seed a repository for a
-new open source project.
+This repository contains the Java soures for cryptoHelper, a sample on how to implement application level encryption. The sample contains code to use the cryptoHelper for Redis and to encrypt CSV files. The Google Cloud platforms provides the key material with the KMS service.
 
-See go/releasing (available externally at
-https://opensource.google/docs/releasing/) for more information about
-releasing a new Google open source project.
+## How to use this sample
+* Clone the repository
+* Install Maven
+* Install OpenJDK, this code was tested with OpenJDK 13.0.1
+* Build sample
+    $ mv package
+* Running test test with a real Redis server, needs a few prefernces to be set. Please lookup how to set preferences for your operating system. This is the list of used preferences in class AppTest:
+  * redisIsOnline
+    * Default: false
+    * Values: true/false
+    * if online, Redis will be tested
+  * redisBatchSize:
+    * Default: 5000
+    * Values: number of records to batch
+    This many records will be writtn between syncs
+  * redisHost4_0
+    * Default: 127.0.0.1
+    * Values: Ip address of Redis 4.0 instance
+  * redisHost3_2
+    * Default: 127.0.0.1
+    * Values: Ip address of Redi 3.2 instance
+  * keysetFilename
+    * Default:
 
 This template uses the Apache license, as is Google's default.  See the
 documentation for instructions on using alternate license.
