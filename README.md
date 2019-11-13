@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 
-# cryptoHelpe
+# CryptoHelper
 
 ## Index
 
@@ -27,6 +27,7 @@
 This repository contains the Java sources for cryptoHelper, a sample on how to implement application level encryption. The sample contains code to use the cryptoHelper for Redis and to encrypt CSV files. The Google Cloud platforms provides the key material with the Google Cloud KMS service.
 
 ## Getting Started
+
 * Clone the repository
 * Install Maven, this code was tested with OpenJDK 3.6.2
 * Install OpenJDK, this code was tested with OpenJDK 13.0.1
@@ -35,6 +36,7 @@ This repository contains the Java sources for cryptoHelper, a sample on how to i
 * Running tests with a real Redis server, needs a few preferences to be set. Please lookup up how to set preferences for your operating system.
 
 ### Preferences in class AppTest:
+
   * com.google.samples.kms.ale.AppTest
     * Default: true
     Will be written on class initialization. This will help to locate the preferences for this class
@@ -55,7 +57,9 @@ This repository contains the Java sources for cryptoHelper, a sample on how to i
   * keysetFilename
     * Default: keyset.json
     * Value: Path to where keyset file will be written (only for debugging purposes)
+    
 ### Preferences used by the CryptoHelper Class:
+
   * com.google.samples.kms.CryptoHelper
     * Default: true
     Will be written on class initialization. This will help to locate the preferences for this class
