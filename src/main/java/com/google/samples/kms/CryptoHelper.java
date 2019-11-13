@@ -40,10 +40,6 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 public class CryptoHelper {
-  public CryptoHelper() throws GeneralSecurityException {
-    TinkConfig.register();
-  }
-
   private static final Preferences preferences = initializePreferences();
   static final String keyResourceIdUri = preferences.get("keyResourceIdUri",
       "gcp-kms://projects/tink-test-infrastructure/locations/global/keyRings/unit-and-integration-testing/cryptoKeys/aead-key");
@@ -54,7 +50,21 @@ public class CryptoHelper {
   static final String charsetName = "UTF-8";
   static final String authenticationText = "CryptoHelper";
 
+  private boolean writeKeyset = false;
   private boolean loadKeyset = false;
+
+  private boolean writeClearKeyset = false;
+  private byte[] authentication = getAuthenticaton();
+
+  private Encoder encoder = Base64.getEncoder();
+  private Decoder decoder = Base64.getDecoder();
+
+  private KeysetHandle keysetHandle;
+  protected Aead aead;
+
+  public CryptoHelper() throws GeneralSecurityException {
+    TinkConfig.register();
+  }
 
   private static Preferences initializePreferences() {
     final String name = CryptoHelper.class.getCanonicalName();
@@ -75,22 +85,15 @@ public class CryptoHelper {
     return this;
   }
 
-  private boolean writeClearKeyset = false;
-
   public CryptoHelper writeClearKeyset(boolean flag) {
     writeClearKeyset = flag;
     return this;
   }
 
-  private boolean writeKeyset = false;
-
   public CryptoHelper writeKeyset(boolean flag) {
     writeKeyset = flag;
     return this;
   }
-
-  Encoder encoder = Base64.getEncoder();
-  Decoder decoder = Base64.getDecoder();
 
   public KmsClient getKmsClient() throws GeneralSecurityException {
     File credentials = new File(kmsCredentialsFilename);
@@ -148,7 +151,7 @@ public class CryptoHelper {
     return encoder.encodeToString(b);
   }
 
-  byte[] getAuthenticaton() {
+  private byte[] getAuthenticaton() {
     if (authentication == null) {
       try {
         authentication = authenticationText.getBytes(charsetName);
@@ -158,8 +161,6 @@ public class CryptoHelper {
     }
     return authentication;
   }
-
-  byte[] authentication = getAuthenticaton();
 
   public String encrypt(String text) //
       throws GeneralSecurityException, IOException, NullPointerException {
@@ -187,16 +188,12 @@ public class CryptoHelper {
     return new String(clearText, charsetName);
   }
 
-  KeysetHandle keysetHandle;
-
-  KeysetHandle getKeysetHandle() throws GeneralSecurityException {
+ private KeysetHandle getKeysetHandle() throws GeneralSecurityException {
     if (keysetHandle == null) {
       keysetHandle = KeysetHandle.generateNew(AeadKeyTemplates.createAesGcmKeyTemplate(256 / 8));
     }
     return keysetHandle;
   }
-
-  protected Aead aead;
 
   public Aead getAead() throws java.security.GeneralSecurityException, IOException, NullPointerException {
     if (aead == null) {
@@ -211,5 +208,4 @@ public class CryptoHelper {
     }
     return aead;
   }
-
 }
