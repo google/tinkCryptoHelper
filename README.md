@@ -31,8 +31,7 @@ This repository contains the Java sources for cryptoHelper, a sample on how to i
 * Clone the repository
 * Install Maven, this code was tested with OpenJDK 3.6.2
 * Install OpenJDK, this code was tested with OpenJDK 13.0.1
-* Build sample
-    $ mv package
+* Build sample  ```$ mvn package```
 * Running tests with a real Redis server, needs a few preferences to be set. Please lookup up how to set preferences for your operating system.
 
 ### Preferences in class AppTest:
