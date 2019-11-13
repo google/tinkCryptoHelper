@@ -61,7 +61,7 @@ public class CryptoHelper {
   private Encoder encoder = Base64.getEncoder();
   private Decoder decoder = Base64.getDecoder();
 
-  private KeysetHandle keysetHandle;
+  protected KeysetHandle keysetHandle;
   protected Aead aead;
 
   public CryptoHelper() throws GeneralSecurityException {
@@ -190,7 +190,7 @@ public class CryptoHelper {
     return new String(clearText, charsetName);
   }
 
- private KeysetHandle getKeysetHandle() throws GeneralSecurityException {
+ protected KeysetHandle getKeysetHandle() throws GeneralSecurityException {
     if (keysetHandle == null) {
       keysetHandle = KeysetHandle.generateNew(AeadKeyTemplates.createAesGcmKeyTemplate(256 / 8));
     }

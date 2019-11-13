@@ -27,7 +27,7 @@ public class CryptoHelperEnvelope extends CryptoHelper {
   }
 
   @Override
-  KeysetHandle getKeysetHandle() throws GeneralSecurityException {
+  protected KeysetHandle getKeysetHandle() throws GeneralSecurityException {
     if (super.keysetHandle == null) {
       super.keysetHandle = KeysetHandle.generateNew(
           AeadKeyTemplates.createKmsEnvelopeAeadKeyTemplate(keyResourceIdUri, AeadKeyTemplates.AES256_GCM));
