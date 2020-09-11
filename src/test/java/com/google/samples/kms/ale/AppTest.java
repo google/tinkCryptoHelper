@@ -121,7 +121,7 @@ public class AppTest {
     RedisHelper r = new RedisHelper(ctx, host, 6379);
     long time = System.nanoTime();
     r.set(data.iterator());
-    System.out.println(String.format("Set of %d encrypted values took on avergage %dµs on host %s", redisBatchSize,
+    System.out.println(String.format("Set of %d encrypted values took on average %dµs on host %s", redisBatchSize,
         (System.nanoTime() - time) / redisBatchSize / 1000, host));
     List<String> keys = new ArrayList<String>();
     for (Map.Entry<String, String> kv : data) {
@@ -130,7 +130,7 @@ public class AppTest {
     String[] keyArray = keys.toArray(new String[0]);
     time = System.nanoTime();
     List<String> clearText = r.get(keyArray);
-    System.out.println(String.format("Get of %d encrypted values took on avergage %dµs on host %s", redisBatchSize,
+    System.out.println(String.format("Get of %d encrypted values took on average %dµs on host %s", redisBatchSize,
         (System.nanoTime() - time) / redisBatchSize / 1000, host));
 
     Iterator<String> actual = clearText.iterator();
@@ -149,7 +149,7 @@ public class AppTest {
     RedisHelper r = new RedisHelper(ctx, host, 6379);
     long time = System.nanoTime();
     r.setClear(data.iterator());
-    System.out.println(String.format("Set of %d cleartext values took on avergage %dµs on host %s", redisBatchSize,
+    System.out.println(String.format("Set of %d cleartext values took on average %dµs on host %s", redisBatchSize,
         (System.nanoTime() - time) / redisBatchSize / 1000, host));
     List<String> keys = new ArrayList<String>();
     for (Map.Entry<String, String> kv : data) {
@@ -158,7 +158,7 @@ public class AppTest {
     String[] keyArray = keys.toArray(new String[0]);
     time = System.nanoTime();
     List<String> clearText = r.getClear(keyArray);
-    System.out.println(String.format("Get of %d cleartext values took on avergage %dµs on host %s", redisBatchSize,
+    System.out.println(String.format("Get of %d cleartext values took on average %dµs on host %s", redisBatchSize,
         (System.nanoTime() - time) / redisBatchSize / 1000, host));
 
     Iterator<String> actual = clearText.iterator();
